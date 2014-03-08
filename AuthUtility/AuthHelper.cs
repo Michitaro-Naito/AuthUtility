@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace AuthUtility.Auth
+namespace AuthUtility
 {
     /// <summary>
     /// Encapsulates JSON data for ID token body.

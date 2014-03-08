@@ -30,7 +30,7 @@ using Google.Apis.Authentication.OAuth2;
 // Used to deserialize the OAuth response.
 using Newtonsoft.Json;
 
-namespace AuthHelper.Auth
+namespace AuthUtility
 {
     /// <summary>
     /// A utility class used to manually exchange an authorization code for
@@ -40,16 +40,13 @@ namespace AuthHelper.Auth
     /// @author class@google.com (Gus Class)
     public class ManualCodeExchanger
     {
-        const string CLIENT_ID = "764204115437-jsi87lp4h0hndgil8f62llnliaufnivn.apps.googleusercontent.com";
-        const string CLIENT_SECRET = "38ukKBNUek7cWDa0UoVJXUiV";
-
         /// <summary>
         /// Exchanges an OAuth2 authorization code for OAuth2 credentials.
         /// </summary>
         /// <param name="code">The OAuth2 authorization code from the
         /// sign-in button.</param>
         /// <returns></returns>
-        static public OAuthResponseObject ExchangeCode(string code)
+        static public OAuthResponseObject ExchangeCode(string clientId, string clientSecret, string code)
         {
             // The request will be made to the authentication server.
             WebRequest request = WebRequest.Create(
@@ -60,7 +57,7 @@ namespace AuthHelper.Auth
             request.Method = "POST";
 
             // Create POST data.
-            string postData = FormPostData(code);
+            string postData = FormPostData(clientId, clientSecret, code);
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
 
             // Set up the POST request for the code exchange.
@@ -91,15 +88,15 @@ namespace AuthHelper.Auth
         /// <param name="code">The authorization code to be exchanged for
         /// tokens.</param>
         /// <returns>The POST string.</returns>
-        static public string FormPostData(string code)
+        static public string FormPostData(string clientId, string clientSecret, string code)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("code=");
             builder.Append(code);
             builder.Append("&client_id=");
-            builder.Append(CLIENT_ID);
+            builder.Append(clientId);
             builder.Append("&client_secret=");
-            builder.Append(CLIENT_SECRET);
+            builder.Append(clientSecret);
             builder.Append("&redirect_uri=");
             builder.Append("postmessage");
             builder.Append("&grant_type=authorization_code");
