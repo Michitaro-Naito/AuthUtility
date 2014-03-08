@@ -53,10 +53,9 @@ namespace AuthUtility
         /// <param name="bytes"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        const string SecretString = ";lw/rl309kLKSDen/ぷーちゃん！34wlek:zvslk349907dahIlove990you!";
-        public static string Hash(byte[] bytes)
+        public static string Hash(string secretString, byte[] bytes)
         {
-            var key = Encoding.UTF8.GetBytes(SecretString);
+            var key = Encoding.UTF8.GetBytes(secretString);
             byte[] hash;
             using (var sha = new System.Security.Cryptography.SHA512Managed())
             {
@@ -64,15 +63,15 @@ namespace AuthUtility
             }
             return Convert.ToBase64String(hash);
         }
-        public static string Hash(string str)
+        public static string Hash(string secretString, string str)
         {
-            return Hash(Encoding.UTF8.GetBytes(str));
+            return Hash(secretString, Encoding.UTF8.GetBytes(str));
         }
 
         // MD5 hash, less secure.
-        public static string MD5Hash(byte[] bytes)
+        public static string MD5Hash(string secretString, byte[] bytes)
         {
-            var key = Encoding.UTF8.GetBytes(SecretString);
+            var key = Encoding.UTF8.GetBytes(secretString);
             byte[] hash;
             using (var sha = new System.Security.Cryptography.MD5CryptoServiceProvider())
             {
@@ -80,9 +79,9 @@ namespace AuthUtility
             }
             return Convert.ToBase64String(hash);
         }
-        public static string MD5Hash(string str)
+        public static string MD5Hash(string secretString, string str)
         {
-            return MD5Hash(Encoding.UTF8.GetBytes(str));
+            return MD5Hash(secretString, Encoding.UTF8.GetBytes(str));
         }
 
         /// <summary>

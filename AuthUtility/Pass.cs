@@ -95,11 +95,11 @@ namespace AuthUtility
         /// </summary>
         /// <param name="authObject">A response from Google+.</param>
         /// <returns></returns>
-        public static Pass GenerateFromAuthObject(OAuthResponseObject authObject)
+        public static Pass GenerateFromAuthObject(string secretString, OAuthResponseObject authObject)
         {
             var googlePlusId = AuthHelper.GetGooglePlusId(authObject.id_token);
             var realId = "Plus-" + googlePlusId;
-            var userId = AuthHelper.MD5Hash(realId);
+            var userId = AuthHelper.MD5Hash(secretString, realId);
             var data = new PassData()
             {
                 access_token = authObject.access_token,
