@@ -33,7 +33,7 @@ namespace AuthUtilityTest
             // Tests valid data
             var pass = new GamePass();
             pass.data.userId = "Foo";
-            pass.data.redirectUrl = url;
+            pass.data.authority = url;
             pass.data.expires = DateTime.UtcNow.AddHours(1);
             pass.SignThis(privateKeyXmlString);
             Assert.IsTrue(pass.IsValid(publicKeyXmlString, url));

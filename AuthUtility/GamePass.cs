@@ -11,7 +11,7 @@ namespace AuthUtility
     public class GamePassData
     {
         public string userId;
-        public string redirectUrl;
+        public string authority;
         public DateTime expires;
     }
 
@@ -35,10 +35,10 @@ namespace AuthUtility
         /// </summary>
         /// <param name="publicKey"></param>
         /// <returns></returns>
-        public bool IsValid(string publicKeyXmlString, string redirectUrlRequested)
+        public bool IsValid(string publicKeyXmlString, string authority)
         {
             // Valid redirectUrl?
-            if (data.redirectUrl != redirectUrlRequested)
+            if (data.authority != authority)
                 return false;
 
             // Expired?
