@@ -25,6 +25,11 @@ namespace AuthUtility
         public GamePassData data = new GamePassData();
         public string sign;
 
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
+
         /// <summary>
         /// Returns true if sign is valid.
         /// </summary>
