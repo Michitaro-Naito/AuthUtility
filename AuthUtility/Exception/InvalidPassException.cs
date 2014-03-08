@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthUtility
+namespace AuthUtility.Exception
 {
-    public class Class1
+    class InvalidPassException : System.Exception
     {
     }
 }

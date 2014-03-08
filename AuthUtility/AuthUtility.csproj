@@ -30,6 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CosmicFleet\CosmicFleet\Libs\DotNetOpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.3.0.15233, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CosmicFleet\CosmicFleet\Libs\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Authentication.OAuth2, Version=1.3.0.15231, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CosmicFleet\CosmicFleet\Libs\Google.Apis.Authentication.OAuth2.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Plus.v1, Version=1.3.0.15233, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CosmicFleet\CosmicFleet\Libs\Google.Apis.Plus.v1.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Net35, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CosmicFleet\CosmicFleet\Libs\Newtonsoft.Json.Net35.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,8 +59,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Exception\InvalidPassException.cs" />
+    <Compile Include="Helper\AuthHelper.cs" />
+    <Compile Include="Helper\ManualCodeExchanger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\DotNetOpenAuth.dll" />
+    <Content Include="Lib\Google.Apis.Authentication.OAuth2.dll" />
+    <Content Include="Lib\Google.Apis.dll" />
+    <Content Include="Lib\Google.Apis.Plus.v1.dll" />
+    <Content Include="Lib\Newtonsoft.Json.Net35.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
