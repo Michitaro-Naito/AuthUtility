@@ -9,7 +9,20 @@ namespace AuthUtilityTest
     public class UnitTest1
     {
         [TestMethod]
-        public void GamePassSignTest()
+        public void EncryptDecrypt()
+        {
+            var key = "RYtoTxHdu9Er4F9oFdK3m7k8tpu9hitAxWPU9iFRubg=";
+            var iv = "orfxwbQx7HoHja4SDWo9UA==";
+
+            var original = "foo";
+            var cipher = AuthHelper.Encrypt(original, key, iv);
+            var decrypted = AuthHelper.Decrypt(cipher, key, iv);
+
+            Assert.AreEqual(original, decrypted);
+        }
+
+        [TestMethod]
+        public void EntryPassSignTest()
         {
             // Tests using generated keys
             string privateKeyXmlString;
@@ -19,15 +32,15 @@ namespace AuthUtilityTest
                 privateKeyXmlString = rsa.ToXmlString(true);
                 publicKeyXmlString = rsa.ToXmlString(false);
             }
-            TestGamePass(privateKeyXmlString, publicKeyXmlString);
+            TestEntryPass(privateKeyXmlString, publicKeyXmlString);
 
             // Tests using exported keys
             privateKeyXmlString = "<RSAKeyValue><Modulus>hhjhOYvcx6I2qwtLbE2k1wmYO3c46S7Ay7U4/3yaNgaNXXXSuzCux0y6vLq1ucu7sJISPklayGHqYPzOO9oDpe+MB44g1btuWyEzj162+JPI8caU3Wqu5IP9WVjayG9/nvEmCvB4TuoopoxLdX9GZvLvI2SdBfa3r0T9tuX4J2E=</Modulus><Exponent>AQAB</Exponent><P>tjfM5wE5ib73m+kSU9q44gjXG9GljoqS0mnAgZXNx0V3U5YG7Qf1e2oIFKL3v7MbiShDhKw2FcpOyDgyzTltLQ==</P><Q>vGUD14ZArvtGfuwSXCLstM2V0HskqZLeaMfsiImN/M68PELKHC2w6doOesqPzEqmJpJFtTPm4RV8BwLGsyeLhQ==</Q><DP>RaxyccXbHVtizD/DXULdvLgKoD16Y1WDLGd5T1Nbep2KMfDEty964vS5IELsHmW62qgFoR5EE/LmStKKQkR6BQ==</DP><DQ>C1FCLtNY1Wow7PT/kVtjvuTOyCxtomY5SDAibH1e8z30HuagP5sbEqFP116Nzub5Hj4RQ/ZvOzxQLBelmiOZBQ==</DQ><InverseQ>eQR2zzt/cFdFgwPvm5utAXrBGuX0ZrntjR4TuEv8UcNlQuPaLvDreze5qurZPkF+XFGaw7H829LCh/vn/rDjmw==</InverseQ><D>Eb2v6nuhCX5iCi4T2+/Hy7VWwSNMUblgQ3Ml59M12cjzIfbJGv/dV7vEhtyS11JncfxZUolE6/bcWdmIdW2qBrSKt28uxGcd6isiCa41EZAqi74PRA7wJFbwr0q5TC6/pvS4EV2RuZbfYFddizIhHdAu4Oiflpnml7Cmw4Txw/k=</D></RSAKeyValue>";
             publicKeyXmlString = "<RSAKeyValue><Modulus>hhjhOYvcx6I2qwtLbE2k1wmYO3c46S7Ay7U4/3yaNgaNXXXSuzCux0y6vLq1ucu7sJISPklayGHqYPzOO9oDpe+MB44g1btuWyEzj162+JPI8caU3Wqu5IP9WVjayG9/nvEmCvB4TuoopoxLdX9GZvLvI2SdBfa3r0T9tuX4J2E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
-            TestGamePass(privateKeyXmlString, publicKeyXmlString);
+            TestEntryPass(privateKeyXmlString, publicKeyXmlString);
         }
 
-        private void TestGamePass(string privateKeyXmlString, string publicKeyXmlString)
+        private void TestEntryPass(string privateKeyXmlString, string publicKeyXmlString)
         {
             var url = "http://amlitek.com/";
             // Tests valid data

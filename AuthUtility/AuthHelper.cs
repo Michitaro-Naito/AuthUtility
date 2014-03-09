@@ -89,14 +89,8 @@ namespace AuthUtility
         /// </summary>
         /// <param name="plainText"></param>
         /// <returns></returns>
-        const string _keyString = "RYtoTxHdu9Er4F9oFdK3m7k8tpu9hitAxWPU9iFRubg=";
-        const string _ivString = "orfxwbQx7HoHja4SDWo9UA==";
-        public static string Encrypt(string plainText, byte[] key = null, byte[] iv = null)
+        public static string Encrypt(string plainText, byte[] key, byte[] iv)
         {
-            if (key == null)
-                key = Convert.FromBase64String(_keyString);
-            if (iv == null)
-                iv = Convert.FromBase64String(_ivString);
             using (var aes = new AesManaged() { Key = key, IV = iv })
             using (var enc = aes.CreateEncryptor(key, iv))
             using (var ms = new MemoryStream())
@@ -109,13 +103,13 @@ namespace AuthUtility
                 return Convert.ToBase64String(ms.ToArray());
             }
         }
-
-        public static string Decrypt(string encodedCipherText, byte[] key = null, byte[] iv = null)
+        public static string Encrypt(string plainText, string key, string iv)
         {
-            if (key == null)
-                key = Convert.FromBase64String(_keyString);
-            if (iv == null)
-                iv = Convert.FromBase64String(_ivString);
+            return Encrypt(plainText, Convert.FromBase64String(key), Convert.FromBase64String(iv));
+        }
+
+        public static string Decrypt(string encodedCipherText, byte[] key, byte[] iv)
+        {
             using (var aes = new AesManaged() { Key = key, IV = iv })
             using (var dec = aes.CreateDecryptor(key, iv))
             using (var ms = new MemoryStream(Convert.FromBase64String(encodedCipherText)))
@@ -124,6 +118,10 @@ namespace AuthUtility
             {
                 return sr.ReadToEnd();
             }
+        }
+        public static string Decrypt(string encodedCipherText, string key, string iv)
+        {
+            return Decrypt(encodedCipherText, Convert.FromBase64String(key), Convert.FromBase64String(iv));
         }
     }
 }
