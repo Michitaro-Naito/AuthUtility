@@ -31,7 +31,7 @@ namespace AuthUtilityTest
         {
             var url = "http://amlitek.com/";
             // Tests valid data
-            var pass = new GamePass();
+            var pass = new EntryPass();
             pass.data.userId = "Foo";
             pass.data.authority = url;
             pass.data.expires = DateTime.UtcNow.AddHours(1);
@@ -39,7 +39,7 @@ namespace AuthUtilityTest
             Assert.IsTrue(pass.IsValid(publicKeyXmlString, url));
 
             // Serializes and Deserializes
-            pass = GamePass.FromBase64EncodedJson(pass.ToBase64EncodedJson());
+            pass = EntryPass.FromBase64EncodedJson(pass.ToBase64EncodedJson());
             Assert.IsTrue(pass.IsValid(publicKeyXmlString, url));
 
             // Tests invalid data (userId modified)
