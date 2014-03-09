@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GamePass.cs" />
+    <Compile Include="EntryPass.cs" />
     <Compile Include="InvalidPassException.cs" />
     <Compile Include="AuthHelper.cs" />
     <Compile Include="ManualCodeExchanger.cs" />
